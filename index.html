@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shcema</title>
+</head>
+<body>
+    <style>
+/* Add a border around the entire table */
+table {
+  border: 1px solid #ccc;
+}
+
+/* Center align the table */
+table {
+  margin: 0 auto;
+}
+
+/* Add padding to the table */
+table {
+  padding: 10px;
+}
+
+/* Style the table header (th) cells */
+th {
+  text-align: left;
+  background-color: #f2f2f2;
+  color: #333;
+  font-weight: bold;
+  padding: 12px 10px;
+  border: 1px solid #ccc;
+}
+
+/* Style the table body (td) cells */
+td {
+  text-align: left;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+/* Add a border between table rows */
+tr {
+  border-bottom: 1px solid #ccc;
+}
+
+/* Highlight the header row */
+thead tr {
+  background-color: #e0e0e0;
+}
+
+/* Style the first column (e.g., user ID) */
+td:first-child {
+  font-weight: bold;
+  color: #007bff; /* Blue color for the first column */
+}
+
+/* Add a subtle box shadow to the table */
+table {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Add a fixed table header to improve scrolling */
+thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #f2f2f2;
+}
+.table-container {
+  max-width: 800px; /* Set a maximum width for the container */
+  margin: 0 auto; /* Center align the container */
+  padding: 20px; /* Add some padding around the container */
+  border: 1px solid #ccc; /* Add a border around the container */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+  background-color: #fff; /* Set a background color for the container */
+  border-radius: 5px; /* Add rounded corners to the container */
+}
+    </style>
+
+    <div class="table-container">
+
+    <table>
+        <thead>
+            <tr>
+                <th>Column</th>
+                <th>Data Type</th>
+                <th>Constraints</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>user_id</td>
+                <td>INT (PK)</td>
+                <td>Auto-increment, NOT NULL</td>
+                <td>Primary key, unique identifier for users.</td>
+            </tr>
+            <tr>
+                <td>user_status</td>
+                <td>ENUM</td>
+                <td>NOT NULL, DEFAULT 'Active'</td>
+                <td>User status (InActive, Active, Paused, Deleted).</td>
+            </tr>
+            <tr>
+                <td>user_type</td>
+                <td>ENUM</td>
+                <td>NOT NULL, DEFAULT 'Normal_User'</td>
+                <td>User type (Admin, Moderator, Trader_User, Normal_User).</td>
+            </tr>
+            <tr>
+                <td>user_nick_name</td>
+                <td>VARCHAR(255)</td>
+                <td></td>
+                <td>Nickname or alias of the user.</td>
+            </tr>
+            <tr>
+                <td>user_name</td>
+                <td>VARCHAR(255)</td>
+                <td>NOT NULL</td>
+                <td>Full name of the user.</td>
+            </tr>
+            <tr>
+                <td>user_email</td>
+                <td>VARCHAR(255)</td>
+                <td>NOT NULL, UNIQUE</td>
+                <td>Email address of the user.</td>
+            </tr>
+            <tr>
+                <td>user_password</td>
+                <td>VARCHAR(255)</td>
+                <td>NOT NULL</td>
+                <td>Encrypted password of the user.</td>
+            </tr>
+            <tr>
+                <td>user_telephone</td>
+                <td>VARCHAR(20)</td>
+                <td></td>
+                <td>Telephone number of the user.</td>
+            </tr>
+            <tr>
+                <td>user_address</td>
+                <td>VARCHAR(255)</td>
+                <td></td>
+                <td>Address of the user.</td>
+            </tr>
+            <tr>
+                <td>user_created_at</td>
+                <td>DATETIME</td>
+                <td>NOT NULL, DEFAULT CURRENT_TIMESTAMP</td>
+                <td>Timestamp of user registration.</td>
+            </tr>
+        </tbody>
+        
+    </table>
+    <ol start="2">
+        <li><strong>User log table (<code>user_log</code>):</strong></li>
+    </ol>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Column</th>
+                <th>Data Type</th>
+                <th>Constraints</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>userlog_id</td>
+                <td>INT (PK)</td>
+                <td>Auto-increment, NOT NULL</td>
+                <td>Primary key, unique identifier for logs.</td>
+            </tr>
+            <tr>
+                <td>user_id</td>
+                <td>INT (FK)</td>
+                <td>NOT NULL</td>
+                <td>Foreign key linking the log entry to the user.</td>
+            </tr>
+            <tr>
+                <td>userlog_ip</td>
+                <td>VARCHAR(45)</td>
+                <td>NOT NULL</td>
+                <td>IP address of the user during the log.</td>
+            </tr>
+            <tr>
+                <td>userlog_timestamp</td>
+                <td>DATETIME</td>
+                <td>NOT NULL, DEFAULT CURRENT_TIMESTAMP</td>
+                <td>Timestamp of the log entry.</td>
+            </tr>
+        </tbody>
+    </table>
+    <ol start="3">
+        <li><strong>User alerts table (<code>user_alerts</code>):</strong></li>
+    </ol>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Column</th>
+                <th>Data Type</th>
+                <th>Constraints</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>useralert_id</td>
+                <td>INT (PK)</td>
+                <td>Auto-increment, NOT NULL</td>
+                <td>Primary key, unique identifier for alerts.</td>
+            </tr>
+            <tr>
+                <td>user_id</td>
+                <td>INT (FK)</td>
+                <td>NOT NULL</td>
+                <td>Foreign key linking the alert to the corresponding user.</td>
+            </tr>
+            <tr>
+                <td>useralert_status</td>
+                <td>ENUM</td>
+                <td>NOT NULL</td>
+                <td>Alert status (Unseen, Saw).</td>
+            </tr>
+            <tr>
+                <td>useralert_type</td>
+                <td>ENUM</td>
+                <td>NOT NULL</td>
+                <td>Alert type (Primary, Secondary, Success, Danger, Warning, Info, Light, Dark).</td>
+            </tr>
+            <tr>
+                <td>useralert_first_seen</td>
+                <td>DATETIME</td>
+                <td>NOT NULL, DEFAULT CURRENT_TIMESTAMP</td>
+                <td>Timestamp for the first time the user saw the alert.</td>
+            </tr>
+            <tr>
+                <td>useralert_last_seen</td>
+                <td>DATETIME</td>
+                <td>NOT NULL, DEFAULT CURRENT_TIMESTAMP</td>
+                <td>Timestamp for the last time the user saw the alert.</td>
+            </tr>
+        </tbody>
+    </table>
+    <p><strong>Admarket table (<code>admarket</code>):</strong></p>
+    <table>
+        <thead>
+            <tr>
+                <th>Column</th>
+                <th>Data Type</th>
+                <th>Constraints</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>adm_id</td>
+                <td>INT (Primary Key)</td>
+                <td>Auto-increment</td>
+                <td>Unique identifier for admarket record.</td>
+            </tr>
+            <tr>
+                <td>adm_user_id</td>
+                <td>INT (Foreign Key)</td>
+                <td>NOT NULL</td>
+                <td>References the user who posted the market ad.</td>
+            </tr>
+            <tr>
+                <td>adm_admin_id</td>
+                <td>INT (Foreign Key)</td>
+                <td></td>
+                <td>References the admin who accepted the market ad.</td>
+            </tr>
+            <tr>
+                <td>adm_cat_id</td>
+                <td>INT (Foreign Key)</td>
+                <td>NOT NULL</td>
+                <td>References the category of the market ad.</td>
+            </tr>
+            <tr>
+                <td>adm_subcat_id</td>
+                <td>INT (Foreign Key)</td>
+                <td>NOT NULL</td>
+                <td>References the subcategory of the market ad.</td>
+            </tr>
+            <tr>
+                <td>adm_status</td>
+                <td>ENUM</td>
+                <td>NOT NULL, DEFAULT 'Active'</td>
+                <td>Status of the market ad (InActive, Active, Paused, Deleted).</td>
+            </tr>
+            <tr>
+                <td>adm_type</td>
+                <td>ENUM</td>
+                <td>NOT NULL</td>
+                <td>Type of the market ad (New, Used).</td>
+            </tr>
+            <tr>
+                <td>adm_title</td>
+                <td>VARCHAR(255)</td>
+                <td>NOT NULL</td>
+                <td>Title of the market ad.</td>
+            </tr>
+            <tr>
+                <td>adm_description</td>
+                <td>TEXT</td>
+                <td>NOT NULL</td>
+                <td>Description of the market ad.</td>
+            </tr>
+            <tr>
+                <td>adm_price</td>
+                <td>DECIMAL(10, 2)</td>
+                <td></td>
+                <td>Price of the market item or service.</td>
+            </tr>
+            <tr>
+                <td>adm_location</td>
+                <td>VARCHAR(255)</td>
+                <td></td>
+                <td>Location of the market item or service.</td>
+            </tr>
+            <tr>
+                <td>adm_contact</td>
+                <td>ENUM</td>
+                <td>NOT NULL</td>
+                <td>Contact method for the market ad (Phone, Email, Both).</td>
+            </tr>
+            <tr>
+                <td>adm_pictures</td>
+                <td>JSON</td>
+                <td></td>
+                <td>JSON array of picture URLs for the market ad.</td>
+            </tr>
+            <tr>
+                <td>adm_viewscounter</td>
+                <td>INT</td>
+                <td>NOT NULL, DEFAULT 0</td>
+                <td>Counter for the number of views the market ad received.</td>
+            </tr>
+            <tr>
+                <td>adm_TIMESTAMP</td>
+                <td>TIMESTAMP</td>
+                <td>NOT NULL, DEFAULT CURRENT_TIMESTAMP</td>
+                <td>Timestamp of the market ad posting.</td>
+            </tr>
+        </tbody>
+    </table>
+
+<p><strong>Adjob table (<code>adjob</code>):</strong></p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Column</th>
+            <th>Data Type</th>
+            <th>Constraints</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>adj_id</td>
+            <td>INT (Primary Key)</td>
+            <td>Auto-increment</td>
+            <td>Unique identifier for adjob record.</td>
+        </tr>
+        <tr>
+            <td>adj_user_id</td>
+            <td>INT (Foreign Key)</td>
+            <td>NOT NULL</td>
+            <td>References the user who posted the job ad.</td>
+        </tr>
+        <tr>
+            <td>adm_admin_id</td>
+            <td>INT (Foreign Key)</td>
+            <td></td>
+            <td>References the admin who accepted the job ad.</td>
+        </tr>
+        <tr>
+            <td>adj_cat_id</td>
+            <td>INT (Foreign Key)</td>
+            <td>NOT NULL</td>
+            <td>References the category of the job ad.</td>
+        </tr>
+        <tr>
+            <td>adj_subcat_id</td>
+            <td>INT (Foreign Key)</td>
+            <td>NOT NULL</td>
+            <td>References the subcategory of the job ad.</td>
+        </tr>
+        <tr>
+            <td>adj_status</td>
+            <td>ENUM</td>
+            <td>NOT NULL, DEFAULT 'Active'</td>
+            <td>Status of the job ad (InActive, Active, Paused, Deleted).</td>
+        </tr>
+        <tr>
+            <td>adj_type</td>
+            <td>ENUM</td>
+            <td>NOT NULL</td>
+            <td>Type of the job ad (New, Used).</td>
+        </tr>
+        <tr>
+            <td>adj_title</td>
+            <td>VARCHAR(255)</td>
+            <td>NOT NULL</td>
+            <td>Title of the job ad.</td>
+        </tr>
+        <tr>
+            <td>adj_description</td>
+            <td>TEXT</td>
+            <td>NOT NULL</td>
+            <td>Description of the job ad.</td>
+        </tr>
+        <tr>
+            <td>adj_salary</td>
+            <td>DECIMAL(10, 2)</td>
+            <td></td>
+            <td>Salary offered for the job.</td>
+        </tr>
+        <tr>
+            <td>adj_location</td>
+            <td>VARCHAR(255)</td>
+            <td></td>
+            <td>Location of the job.</td>
+        </tr>
+        <tr>
+            <td>adj_contact</td>
+            <td>ENUM</td>
+            <td>NOT NULL</td>
+            <td>Contact method for the job ad (Phone, Email, Both).</td>
+        </tr>
+        <tr>
+            <td>adj_pictures</td>
+            <td>JSON</td>
+            <td></td>
+            <td>JSON array of picture URLs for the job ad.</td>
+        </tr>
+        <tr>
+            <td>adj_viewscounter</td>
+            <td>INT</td>
+            <td>NOT NULL, DEFAULT 0</td>
+            <td>Counter for the number of views the job ad received.</td>
+        </tr>
+        <tr>
+            <td>adj_TIMESTAMP</td>
+            <td>TIMESTAMP</td>
+            <td>NOT NULL, DEFAULT CURRENT_TIMESTAMP</td>
+            <td>Timestamp of the job ad posting.</td>
+        </tr>
+    </tbody>
+</table>
+
+<p><strong>Adcar table (<code>adcar</code>):</strong></p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Column</th>
+            <th>Data Type</th>
+            <th>Constraints</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>adc_id</td>
+            <td>INT (Primary Key)</td>
+            <td>Auto-increment</td>
+            <td>Unique identifier for adcar record.</td>
+        </tr>
+        <tr>
+            <td>adc_user_id</td>
+            <td>INT (Foreign Key)</td>
+            <td>NOT NULL</td>
+            <td>References the user who posted the car ad.</td>
+        </tr>
+        <tr>
+            <td>adm_admin_id</td>
+            <td>INT (Foreign Key)</td>
+            <td></td>
+            <td>References the admin who accepted the car ad.</td>
+        </tr>
+        <tr>
+            <td>adc_cat_id</td>
+            <td>INT (Foreign Key)</td>
+            <td>NOT NULL</td>
+            <td>References the category of the car ad.</td>
+        </tr>
+        <tr>
+            <td>adc_subcat_id</td>
+            <td>INT (Foreign Key)</td>
+            <td>NOT NULL</td>
+            <td>References the subcategory of the car ad.</td>
+        </tr>
+        <tr>
+            <td>adc_status</td>
+            <td>ENUM</td>
+            <td>NOT NULL, DEFAULT 'Active'</td>
+            <td>Status of the car ad (InActive, Active, Paused, Deleted).</td>
+        </tr>
+        <tr>
+            <td>adc_type</td>
+            <td>ENUM</td>
+            <td>NOT NULL</td>
+            <td>Type of the car ad (New, Used).</td>
+        </tr>
+        <tr>
+            <td>adc_title</td>
+            <td>VARCHAR(255)</td>
+            <td>NOT NULL</td>
+            <td>Title of the car ad.</td>
+        </tr>
+        <tr>
+            <td>adc_description</td>
+            <td>TEXT</td>
+            <td>NOT NULL</td>
+            <td>Description of the car ad.</td>
+        </tr>
+        <tr>
+            <td>adc_price</td>
+            <td>DECIMAL(10, 2)</td>
+            <td></td>
+            <td>Price of the car.</td>
+        </tr>
+        <tr>
+            <td>adc_location</td>
+            <td>VARCHAR(255)</td>
+            <td></td>
+            <td>Location of the car.</td>
+        </tr>
+        <tr>
+            <td>adc_contact</td>
+            <td>ENUM</td>
+            <td>NOT NULL</td>
+            <td>Contact method for the car ad (Phone, Email, Both).</td>
+        </tr>
+        <tr>
+            <td>adc_pictures</td>
+            <td>JSON</td>
+            <td></td>
+            <td>JSON array of picture URLs for the car ad.</td>
+        </tr>
+        <tr>
+            <td>adc_viewscounter</td>
+            <td>INT</td>
+            <td>NOT NULL, DEFAULT 0</td>
+            <td>Counter for the number of views the car ad received.</td>
+        </tr>
+        <tr>
+            <td>adc_TIMESTAMP</td>
+            <td>TIMESTAMP</td>
+            <td>NOT NULL, DEFAULT CURRENT_TIMESTAMP</td>
+            <td>Timestamp of the car ad posting.</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<p><strong>Adproperty table (<code>adproperty</code>):</strong></p>
+<table>
+    <thead>
+        <tr>
+            <th>Column</th>
+            <th>Data Type</th>
+            <th>Constraints</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>adp_id</td>
+            <td>INT (Primary Key)</td>
+            <td>Auto-increment</td>
+            <td>Unique identifier for adproperty record.</td>
+        </tr>
+        <tr>
+            <td>adp_user_id</td>
+            <td>INT (Foreign Key)</td>
+            <td>NOT NULL</td>
+            <td>References the user who posted the property ad.</td>
+        </tr>
+        <tr>
+            <td>adm_admin_id</td>
+            <td>INT (Foreign Key)</td>
+            <td></td>
+            <td>References the admin who accepted the property ad.</td>
+        </tr>
+        <tr>
+            <td>adp_cat_id</td>
+            <td>INT (Foreign Key)</td>
+            <td>NOT NULL</td>
+            <td>References the category of the property ad.</td>
+        </tr>
+        <tr>
+            <td>adp_subcat_id</td>
+            <td>INT (Foreign Key)</td>
+            <td>NOT NULL</td>
+            <td>References the subcategory of the property ad.</td>
+        </tr>
+        <tr>
+            <td>adp_status</td>
+            <td>ENUM</td>
+            <td>NOT NULL, DEFAULT 'Active'</td>
+            <td>Status of the property ad (InActive, Active, Paused, Deleted).</td>
+        </tr>
+        <tr>
+            <td>adp_type</td>
+            <td>ENUM</td>
+            <td>NOT NULL</td>
+            <td>Type of the property ad (New, Used).</td>
+        </tr>
+        <tr>
+            <td>adp_title</td>
+            <td>VARCHAR(255)</td>
+            <td>NOT NULL</td>
+            <td>Title of the property ad.</td>
+        </tr>
+        <tr>
+            <td>adp_description</td>
+            <td>TEXT</td>
+            <td>NOT NULL</td>
+            <td>Description of the property ad.</td>
+        </tr>
+        <tr>
+            <td>adp_price</td>
+            <td>DECIMAL(10, 2)</td>
+            <td></td>
+            <td>Price of the property.</td>
+        </tr>
+        <tr>
+            <td>adp_location</td>
+            <td>VARCHAR(255)</td>
+            <td></td>
+            <td>Location of the property.</td>
+        </tr>
+        <tr>
+            <td>adp_contact</td>
+            <td>ENUM</td>
+            <td>NOT NULL</td>
+            <td>Contact method for the property ad (Phone, Email, Both).</td>
+        </tr>
+        <tr>
+            <td>adp_pictures</td>
+            <td>JSON</td>
+            <td></td>
+            <td>JSON array of picture URLs for the property ad.</td>
+        </tr>
+        <tr>
+            <td>adp_viewscounter</td>
+            <td>INT</td>
+            <td>NOT NULL, DEFAULT 0</td>
+            <td>Counter for the number of views the property ad received.</td>
+        </tr>
+        <tr>
+            <td>adp_TIMESTAMP</td>
+            <td>TIMESTAMP</td>
+            <td>NOT NULL, DEFAULT CURRENT_TIMESTAMP</td>
+            <td>Timestamp of the property ad posting.</td>
+        </tr>
+    </tbody>
+</table>
+<p><strong>Adservice table (<code>adservice</code>):</strong></p>
+<table>
+    <thead>
+        <tr>
+            <th>Column</th>
+            <th>Data Type</th>
+            <th>Constraints</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>ads_id</td>
+            <td>INT (Primary Key)</td>
+            <td>Auto-increment</td>
+            <td>Unique identifier for adservice record.</td>
+        </tr>
+        <tr>
+            <td>ads_user_id</td>
+            <td>INT (Foreign Key)</td>
+            <td>NOT NULL</td>
+            <td>References the user who posted the service ad.</td>
+        </tr>
+        <tr>
+            <td>adm_admin_id</td>
+            <td>INT (Foreign Key)</td>
+            <td></td>
+            <td>References the admin who accepted the service ad.</td>
+        </tr>
+        <tr>
+            <td>ads_cat_id</td>
+            <td>INT (Foreign Key)</td>
+            <td>NOT NULL</td>
+            <td>References the category of the service ad.</td>
+        </tr>
+        <tr>
+            <td>ads_subcat_id</td>
+            <td>INT (Foreign Key)</td>
+            <td>NOT NULL</td>
+            <td>References the subcategory of the service ad.</td>
+        </tr>
+        <tr>
+            <td>ads_status</td>
+            <td>ENUM</td>
+            <td>NOT NULL, DEFAULT 'Active'</td>
+            <td>Status of the service ad (InActive, Active, Paused, Deleted).</td>
+        </tr>
+        <tr>
+            <td>ads_type</td>
+            <td>ENUM</td>
+            <td>NOT NULL</td>
+            <td>Type of the service ad (New, Used).</td>
+        </tr>
+        <tr>
+            <td>ads_title</td>
+            <td>VARCHAR(255)</td>
+            <td>NOT NULL</td>
+            <td>Title of the service ad.</td>
+        </tr>
+        <tr>
+            <td>ads_description</td>
+            <td>TEXT</td>
+            <td>NOT NULL</td>
+            <td>Description of the service ad.</td>
+        </tr>
+        <tr>
+            <td>ads_price</td>
+            <td>DECIMAL(10, 2)</td>
+            <td></td>
+            <td>Price of the service.</td>
+        </tr>
+        <tr>
+            <td>ads_location</td>
+            <td>VARCHAR(255)</td>
+            <td></td>
+            <td>Location of the service.</td>
+        </tr>
+        <tr>
+            <td>ads_contact</td>
+            <td>ENUM</td>
+            <td>NOT NULL</td>
+            <td>Contact method for the service ad (Phone, Email, Both).</td>
+        </tr>
+        <tr>
+            <td>ads_pictures</td>
+            <td>JSON</td>
+            <td></td>
+            <td>JSON array of picture URLs for the service ad.</td>
+        </tr>
+        <tr>
+            <td>ads_viewscounter</td>
+            <td>INT</td>
+            <td>NOT NULL, DEFAULT 0</td>
+            <td>Counter for the number of views the service ad received.</td>
+        </tr>
+        <tr>
+            <td>ads_TIMESTAMP</td>
+            <td>TIMESTAMP</td>
+            <td>NOT NULL, DEFAULT CURRENT_TIMESTAMP</td>
+            <td>Timestamp of the service ad posting.</td>
+        </tr>
+    </tbody>
+</table>
+
+    
+  
+    <ol start="6">
+        <li><strong>Item question and answer table (<code>item_qa</code>):</strong></li>
+    </ol><table>
+        <thead>
+            <tr>
+                <th>Column</th>
+                <th>Data Type</th>
+                <th>Constraints</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>qa_id</td>
+                <td>INT (PK)</td>
+                <td>Auto-increment, NOT NULL</td>
+                <td>Primary key, unique identifier for QAs.</td>
+            </tr>
+            <tr>
+                <td>qa_status</td>
+                <td>ENUM</td>
+                <td>NOT NULL</td>
+                <td>Status of the question (Open, Answered, Closed).</td>
+            </tr>
+            <tr>
+                <td>user_id</td>
+                <td>INT (FK)</td>
+                <td>NOT NULL</td>
+                <td>Foreign key linking the question to the user who asked it.</td>
+            </tr>
+            <tr>
+                <td>qa_question</td>
+                <td>TEXT</td>
+                <td>NOT NULL</td>
+                <td>The question asked by the user.</td>
+            </tr>
+            <tr>
+                <td>qa_q_timestamp</td>
+                <td>DATETIME</td>
+                <td>NOT NULL, DEFAULT CURRENT_TIMESTAMP</td>
+                <td>Timestamp when the question was asked.</td>
+            </tr>
+            <tr>
+                <td>qa_answer</td>
+                <td>TEXT</td>
+                <td></td>
+                <td>The answer to the question.</td>
+            </tr>
+            <tr>
+                <td>qa_a_timestamp</td>
+                <td>DATETIME</td>
+                <td></td>
+                <td>Timestamp when the question was answered.</td>
+            </tr>
+        </tbody>
+    </table><ol start="7">
+        <li>
+            <p><strong>Master data tables (<code>md_city</code>, <code>md_city_area</code>, <code>md_mobiles</code>,
+                    <code>md_computers</code>, <code>md_electrical</code>, <code>md_electronics</code>):</strong></p>
+            <p>[Same as before]</p>
+        </li>
+    </ol><table>
+        <thead>
+            <tr>
+                <th>Column</th>
+                <th>Data Type</th>
+                <th>Constraints</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>md_id</td>
+                <td>INT (PK)</td>
+                <td>Auto-increment, NOT NULL</td>
+                <td>Primary key, unique identifier for cities.</td>
+            </tr>
+            <tr>
+                <td>md_city</td>
+                <td>VARCHAR(255)</td>
+                <td>NOT NULL, UNIQUE</td>
+                <td>Name of the city.</td>
+            </tr>
+        </tbody>
+    </table><ol start="2">
+        <li><strong>md_city_area table:</strong></li>
+    </ol><table>
+        <thead>
+            <tr>
+                <th>Column</th>
+                <th>Data Type</th>
+                <th>Constraints</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>md_id</td>
+                <td>INT (PK)</td>
+                <td>Auto-increment, NOT NULL</td>
+                <td>Primary key, unique identifier for city areas.</td>
+            </tr>
+            <tr>
+                <td>md_city_id</td>
+                <td>INT (FK)</td>
+                <td>NOT NULL, FOREIGN KEY to md_city(md_id)</td>
+                <td>Foreign key linking the city area to its city.</td>
+            </tr>
+            <tr>
+                <td>md_city_area</td>
+                <td>VARCHAR(255)</td>
+                <td>NOT NULL, UNIQUE</td>
+                <td>Name of the city area.</td>
+            </tr>
+        </tbody>
+    </table><ol start="3">
+        <li><strong>md_mobiles table:</strong></li>
+    </ol><table>
+        <thead>
+            <tr>
+                <th>Column</th>
+                <th>Data Type</th>
+                <th>Constraints</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>md_id</td>
+                <td>INT (PK)</td>
+                <td>Auto-increment, NOT NULL</td>
+                <td>Primary key, unique identifier for mobiles.</td>
+            </tr>
+            <tr>
+                <td>md_mobiles</td>
+                <td>VARCHAR(255)</td>
+                <td>NOT NULL, UNIQUE</td>
+                <td>Name of the mobile model.</td>
+            </tr>
+        </tbody>
+    </table><ol start="4">
+        <li><strong>md_computers table:</strong></li>
+    </ol><table>
+        <thead>
+            <tr>
+                <th>Column</th>
+                <th>Data Type</th>
+                <th>Constraints</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>md_id</td>
+                <td>INT (PK)</td>
+                <td>Auto-increment, NOT NULL</td>
+                <td>Primary key, unique identifier for computers.</td>
+            </tr>
+            <tr>
+                <td>md_computers</td>
+                <td>VARCHAR(255)</td>
+                <td>NOT NULL, UNIQUE</td>
+                <td>Name of the computer model.</td>
+            </tr>
+        </tbody>
+    </table><ol start="5">
+        <li><strong>md_electrical table:</strong></li>
+    </ol><table>
+        <thead>
+            <tr>
+                <th>Column</th>
+                <th>Data Type</th>
+                <th>Constraints</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>md_id</td>
+                <td>INT (PK)</td>
+                <td>Auto-increment, NOT NULL</td>
+                <td>Primary key, unique identifier for electrical models.</td>
+            </tr>
+            <tr>
+                <td>md_electrical</td>
+                <td>VARCHAR(255)</td>
+                <td>NOT NULL, UNIQUE</td>
+                <td>Name of the electrical model.</td>
+            </tr>
+        </tbody>
+    </table><ol start="6">
+        <li><strong>md_electronics table:</strong></li>
+    </ol><table>
+        <thead>
+            <tr>
+                <th>Column</th>
+                <th>Data Type</th>
+                <th>Constraints</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>md_id</td>
+                <td>INT (PK)</td>
+                <td>Auto-increment, NOT NULL</td>
+                <td>Primary key, unique identifier for electronics models.</td>
+            </tr>
+            <tr>
+                <td>md_electronics</td>
+                <td>VARCHAR(255)</td>
+                <td>NOT NULL, UNIQUE</td>
+                <td>Name of the electronics model.</td>
+            </tr>
+        </tbody>
+    </table>
+        </div>
+
+</body>
+</html>
